@@ -27,7 +27,7 @@
   },
   "imports": {
     "@fathym/common": "jsr:@fathym/common@0.2.267",
-    "@fathym/eac": "jsr:@fathym/eac@0.2.122",
+    "@fathym/eac": "jsr:@fathym/eac@0.2.127-integration",
     "@fathym/eac-applications": "jsr:@fathym/eac-applications@0.0.191",
     "@fathym/ioc": "jsr:@fathym/ioc@0.0.14",
     "@std/assert": "jsr:@std/assert@1.0.14",
