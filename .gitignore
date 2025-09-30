@@ -1,1 +1,19 @@
-404 - Not Found
+.env
+.env.*
+
+# EaC Runtime build directory
+_eac-runtime/
+node_modules/
+
+# State 
+denoKv/
+
+# Testing
+cov/
+
+_compiled/
+
+# Playwright outputs
+playwright-report/
+blob-report/
+test-results/

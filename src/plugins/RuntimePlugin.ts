@@ -40,9 +40,9 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
         },
         $GlobalOptions: {
           DFSs: {
-            PreventWorkers: true
-          }
-        }
+            PreventWorkers: true,
+          },
+        },
       },
     };
 
