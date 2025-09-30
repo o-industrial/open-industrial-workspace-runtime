@@ -1,5 +1,5 @@
 {
-  "name": "@aaa_bbb_ccc/www_xxx_yyy_zzz",
+  "name": "@o-industrial/open-industrial-workspace-runtime",
   "version": "0.0.0",
   "exports": {
     ".": "./main.ts",
@@ -9,14 +9,14 @@
   "tasks": {
     "build": "deno task build:fmt && deno task build:lint && deno task publish:check && deno task test",
     "build:dev": "deno run -A dev.ts build",
-    "build:docker": "docker build --no-cache -t www_xxx_yyy_zzz -f DOCKERFILE .",
+    "build:docker": "docker build --no-cache -t open-industrial-workspace-runtime -f DOCKERFILE .",
     "build:fmt": "deno fmt",
     "build:lint": "deno lint",
     "build:main": "deno run -A main.ts build",
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-    "clean:docker": "docker stop www_xxx_yyy_zzz || true && docker rm www_xxx_yyy_zzz || true",
+    "clean:docker": "docker stop open-industrial-workspace-runtime || true && docker rm open-industrial-workspace-runtime || true",
     "deploy": "npx rimraf cov && deno task build && deno task test && npx ftm git",
-    "deploy:docker": "docker run --name www_xxx_yyy_zzz --network eac-runtimes --env-file .env.docker -dp 127.0.0.1:3000:3000 www_xxx_yyy_zzz",
+    "deploy:docker": "docker run --name open-industrial-workspace-runtime --network eac-runtimes --env-file .env.docker -dp 127.0.0.1:5416:5416 open-industrial-workspace-runtime",
     "dev": "deno run -A --watch=apps/,configs/,data/,routes/,src/,static/ dev.ts",
     "network:docker": "docker network create eac-runtimes || true",
     "publish:check": "deno publish --dry-run --allow-dirty",

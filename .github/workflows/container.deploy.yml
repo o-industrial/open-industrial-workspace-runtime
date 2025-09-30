@@ -5,8 +5,8 @@ on:
     branches: main
 
 env:
-  AZURE_APP_NAME: www_xxx_yyy_zzz
-  IMAGE_NAME: www_xxx_yyy_zzz:latest
+  AZURE_APP_NAME: open-industrial-workspace-runtime
+  IMAGE_NAME: open-industrial-workspace-runtime:latest
   ACR_REGISTRY: ${{ secrets.ACR_REGISTRY }}
   ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
   ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}

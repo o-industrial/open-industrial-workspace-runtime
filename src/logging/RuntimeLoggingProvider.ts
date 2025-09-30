@@ -2,7 +2,10 @@ import { EaCApplicationsLoggingProvider } from '@fathym/eac-applications/runtime
 
 export class RuntimeLoggingProvider extends EaCApplicationsLoggingProvider {
   constructor() {
-    const loggingPackages = ['@aaa_bbb_ccc/common', '@aaa_bbb_ccc/www_xxx_yyy_zzz'];
+    const loggingPackages = [
+      '@o-industrial/common',
+      '@o-industrial/open-industrial-workspace-runtime',
+    ];
 
     super(loggingPackages);
   }
