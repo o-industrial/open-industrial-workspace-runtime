@@ -1,5 +1,5 @@
 import { merge } from '@fathym/common';
-import { AgreementData } from '@o-industrial/common/atomic/organisms';
+import { AgreementData } from '@o-industrial/atomic/organisms';
 import { IoCContainer } from '@fathym/ioc';
 import { saveWithRetry } from '../utils/saveWithRetry.ts';
 import { fromFileUrl, join } from '@std/path';
@@ -181,3 +181,4 @@ export class AgreementManager {
     return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
   }
 }
+

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { PageProps } from '@fathym/eac-applications/preact';
-import { CommitStatusPanel } from '@o-industrial/common/atomic/organisms';
+import { CommitStatusPanel } from '@o-industrial/atomic/organisms';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
 import { WorkspaceManager } from '@o-industrial/common/flow';
 import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
