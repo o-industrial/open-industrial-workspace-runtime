@@ -3,11 +3,7 @@ import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { PageProps } from '@fathym/eac-applications/preact';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
 import { WorkspaceManager } from '@o-industrial/common/flow';
-import {
-  AppFrameBar,
-  BreadcrumbBar,
-  MenuRoot,
-} from '@o-industrial/atomic/molecules';
+import { AppFrameBar, BreadcrumbBar } from '@o-industrial/atomic/molecules';
 import {
   AziPanel,
   CommitStatusPanel,
@@ -18,14 +14,15 @@ import {
 } from '@o-industrial/atomic/organisms';
 import { RuntimeWorkspaceDashboardTemplate } from '@o-industrial/atomic/templates';
 import OICore from '@o-industrial/oi-core-pack';
+import {
+  createWorkspaceAppMenu,
+  getWorkspaceRuntimeMenus,
+} from '@o-industrial/oi-core-pack/runtime/workspace-app-menu';
 import { marked } from 'npm:marked@15.0.1';
 import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
 import { IoCContainer } from '@fathym/ioc';
 import { EverythingAsCode } from '@fathym/eac';
-import {
-  EaCUserLicense,
-  EverythingAsCodeLicensing,
-} from '@fathym/eac-licensing';
+import { EaCUserLicense, EverythingAsCodeLicensing } from '@fathym/eac-licensing';
 import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { EaCApplicationsRuntimeContext } from '@fathym/eac-applications/runtime';
 import { EverythingAsCodeClouds } from '@fathym/eac-azure';
@@ -61,8 +58,7 @@ export const handler: EaCRuntimeHandlerSet<
       OIAPIToken: ctx.State.OIJWT,
       OILicense: ctx.State.UserLicenses?.['o-industrial'],
       AccessRights: appCtx.Runtime.AccessRights ?? [],
-      DeployAccessRight:
-        Deno.env.get('DEPLOY_ACCESS_RIGHT_LOOKUP') || 'Workspace.Deploy',
+      DeployAccessRight: Deno.env.get('DEPLOY_ACCESS_RIGHT_LOOKUP') || 'Workspace.Deploy',
       Username: ctx.State.Username,
       Workspace: ctx.State.Workspace!,
       AziCircuitUrl: Deno.env.get('AZI_MAIN_CIRCUIT_URL')!,
@@ -90,11 +86,11 @@ export default function WorkspacePage({
   const root = `${origin}${oiApiRoot}`;
   const oiSvc = useMemo(
     () => new OpenIndustrialAPIClient(new URL(root), oiApiToken),
-    []
+    [],
   );
 
   const [workspaceMgr, setWorkspaceMgr] = useState<WorkspaceManager | null>(
-    null
+    null,
   );
 
   // ⏬ Load capabilities pack from dynamic endpoint
@@ -128,7 +124,7 @@ export default function WorkspacePage({
           aziWarmQueryUrl,
           undefined,
           accessRights,
-          oiApiToken
+          oiApiToken,
         );
 
         setWorkspaceMgr(mgr);
@@ -152,14 +148,18 @@ export default function WorkspacePage({
     selectCommit,
   } = workspaceMgr.UseCommits();
 
-  const eac: EverythingAsCode &
-    EverythingAsCodeLicensing &
-    EverythingAsCodeClouds = ParentEaC;
+  const eac:
+    & EverythingAsCode
+    & EverythingAsCodeLicensing
+    & EverythingAsCodeClouds = ParentEaC;
 
-  const { handleMenu, modals, showSimLib, showAccProf, showLicense } =
-    workspaceMgr.UseAppMenu(eac);
+  const runtimeMenus = getWorkspaceRuntimeMenus(eac);
 
-  // Icons — reuse your existing set; add a couple of lucide fallbacks where needed
+  const { handleMenu, modals, showSimLib, showAccProf, showLicense } = createWorkspaceAppMenu(
+    workspaceMgr,
+    eac,
+  );
+
   const I = {
     // existing
     save: 'https://api.iconify.design/lucide:save.svg',
@@ -188,195 +188,8 @@ export default function WorkspacePage({
     creditCard: 'https://api.iconify.design/lucide:credit-card.svg',
   } as const;
 
-  const hasWorkspaceCloud =
-    !!eac.Clouds?.Workspace?.Details ||
+  const hasWorkspaceCloud = !!eac.Clouds?.Workspace?.Details ||
     Object.keys(eac.Clouds || {}).length > 0;
-
-  const runtimeMenus: MenuRoot[] = [
-    // // ===== File (unchanged example) =====
-    // {
-    //   id: 'file',
-    //   label: 'File',
-    //   items: [
-    //     {
-    //       type: 'submenu',
-    //       id: 'file.new',
-    //       label: 'New',
-    //       items: [
-    //         { type: 'item', id: 'file.new.workspace', label: 'Workspace', iconSrc: I.archive },
-    //         { type: 'item', id: 'file.new.surface', label: 'Surface', iconSrc: I.archive },
-    //       ],
-    //     },
-    //     { type: 'item', id: 'file.save', label: 'Save', shortcut: '⌘S', iconSrc: I.save },
-    //     { type: 'item', id: 'file.fork', label: 'Fork Workspace', iconSrc: I.fork },
-    //     { type: 'separator', id: 'file.sep1' },
-    //     {
-    //       type: 'submenu',
-    //       id: 'file.export',
-    //       label: 'Export',
-    //       items: [
-    //         { type: 'item', id: 'file.export.json', label: 'Export JSON', iconSrc: I.export, payload: { format: 'json' } },
-    //         { type: 'item', id: 'file.export.png', label: 'Export PNG', iconSrc: I.export, payload: { format: 'png' } },
-    //       ],
-    //     },
-    //   ],
-    // },
-
-    // ===== View (unchanged example) =====
-    // {
-    //   id: 'view',
-    //   label: 'View',
-    //   items: [
-    //     {
-    //       type: 'submenu',
-    //       id: 'view.panels',
-    //       label: 'Panels',
-    //       items: [
-    //         {
-    //           type: 'item',
-    //           id: 'view.toggle.azi',
-    //           label: 'Azi',
-    //           iconSrc: I.eye,
-    //           checked: true,
-    //         },
-    //         {
-    //           type: 'item',
-    //           id: 'view.toggle.inspector',
-    //           label: 'Inspector',
-    //           iconSrc: I.eye,
-    //           checked: true,
-    //         },
-    //         {
-    //           type: 'item',
-    //           id: 'view.toggle.stream',
-    //           label: 'Stream',
-    //           iconSrc: I.eye,
-    //           checked: true,
-    //         },
-    //         {
-    //           type: 'item',
-    //           id: 'view.toggle.timeline',
-    //           label: 'Timeline',
-    //           iconSrc: I.eye,
-    //           checked: true,
-    //         },
-    //       ],
-    //     },
-    //     { type: 'item', id: 'view.fullscreen', label: 'Enter Fullscreen' },
-    //     { type: 'item', id: 'view.reset', label: 'Reset Layout' },
-    //   ],
-    // },
-
-    // ===== Workspace =====
-    {
-      id: 'workspace',
-      label: 'Workspace',
-      items: [
-        {
-          type: 'item',
-          id: 'workspace.settings',
-          label: 'Settings',
-          iconSrc: I.settings,
-        },
-        {
-          type: 'item',
-          id: 'workspace.team',
-          label: 'Team Members',
-          iconSrc: I.users,
-        },
-        {
-          type: 'item',
-          id: 'workspace.viewAll',
-          label: 'View All…',
-          iconSrc: I.stack,
-          payload: { target: 'workspace-index' },
-        },
-      ],
-    },
-
-    // ===== Environment =====
-    {
-      id: 'environment',
-      label: 'Environment',
-      items: [
-        {
-          type: 'item',
-          id: 'env.connections',
-          label: 'Cloud Connections',
-          iconSrc: I.link,
-        },
-        ...(hasWorkspaceCloud
-          ? [
-              {
-                type: 'item' as const,
-                id: 'env.calz',
-                label: 'Manage Private CALZ',
-                iconSrc: I.privateCloud,
-              },
-            ]
-          : []),
-        // Future: Cloud submenus
-        // { type: 'item', id: 'env.secrets', label: 'Manage Secrets', iconSrc: I.lock },
-        // {
-        //   type: 'submenu',
-        //   id: 'env.cloud',
-        //   label: 'Cloud',
-        //   iconSrc: I.cloud,
-        //   items: [
-        //     { type: 'item', id: 'env.cloud.attachManaged', label: 'Attach Managed Cloud', iconSrc: I.cloudAttach },
-        //     { type: 'item', id: 'env.cloud.addPrivate', label: 'Add Private Cloud', iconSrc: I.privateCloud },
-        //   ],
-        // },
-      ],
-    },
-
-    // ===== APIs =====
-    {
-      id: 'apis',
-      label: 'APIs',
-      items: [
-        {
-          type: 'item',
-          id: 'apis.apiKeys',
-          label: 'API Keys',
-          iconSrc: I.key,
-        },
-        {
-          type: 'item',
-          id: 'apis.dataSuite',
-          label: 'Data API Suite',
-          iconSrc: I.stack,
-          payload: { section: 'data' },
-        },
-        {
-          type: 'item',
-          id: 'apis.warmQuery',
-          label: 'Warm Query Management',
-          iconSrc: I.warmQuery,
-        },
-      ],
-    },
-
-    // ===== Billing =====
-    {
-      id: 'billing',
-      label: 'Billing',
-      items: [
-        {
-          type: 'item',
-          id: 'billing.license',
-          label: 'Current License',
-          iconSrc: I.license,
-        },
-        // {
-        //   type: 'item',
-        //   id: 'billing.details',
-        //   label: 'Billing Details',
-        //   iconSrc: I.creditCard, /* or I.dollar */
-        // },
-      ],
-    },
-  ];
 
   const history = workspaceMgr.UseHistory();
 
@@ -389,8 +202,8 @@ export default function WorkspacePage({
 
   const onDeployClick = canDeploy
     ? async () => {
-        await history.deploy();
-      }
+      await history.deploy();
+    }
     : undefined;
 
   return (
@@ -423,16 +236,16 @@ export default function WorkspacePage({
           // onSettingsClick={() => setShowWorkspaceSettings(true)}
         />
       }
-      commitStatus={
-        showCommitPanel ? (
+      commitStatus={showCommitPanel
+        ? (
           <CommitStatusPanel
             commits={commits}
             selectedCommitId={selectedCommitId ?? undefined}
             onSelectCommit={selectCommit}
             onClose={toggleCommitPanel}
           />
-        ) : undefined
-      }
+        )
+        : undefined}
       inspector={<InspectorPanel workspaceMgr={workspaceMgr} />}
       stream={<StreamPanel workspaceMgr={workspaceMgr} />}
       timeline={<TimelinePanel />}
@@ -445,3 +258,4 @@ export default function WorkspacePage({
     </RuntimeWorkspaceDashboardTemplate>
   );
 }
+
