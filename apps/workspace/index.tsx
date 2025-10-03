@@ -3,7 +3,10 @@ import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { PageProps } from '@fathym/eac-applications/preact';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
 import { WorkspaceManager } from '@o-industrial/common/flow';
-import { AppFrameBar, BreadcrumbBar } from '@o-industrial/common/atomic/molecules';
+import {
+  AppFrameBar,
+  BreadcrumbBar,
+} from '@o-industrial/common/atomic/molecules';
 import {
   AziPanel,
   CommitStatusPanel,
@@ -13,12 +16,15 @@ import {
   TimelinePanel,
 } from '@o-industrial/common/atomic/organisms';
 import { RuntimeWorkspaceDashboardTemplate } from '@o-industrial/common/atomic/templates';
-import OICore from '@o-industrial/common/packs/oi-core';
+import OICore from '@o-industrial/oi-core-pack';
 import { marked } from 'npm:marked@15.0.1';
 import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
 import { IoCContainer } from '@fathym/ioc';
 import { EverythingAsCode } from '@fathym/eac';
-import { EaCUserLicense, EverythingAsCodeLicensing } from '@fathym/eac-licensing';
+import {
+  EaCUserLicense,
+  EverythingAsCodeLicensing,
+} from '@fathym/eac-licensing';
 import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { EaCApplicationsRuntimeContext } from '@fathym/eac-applications/runtime';
 
@@ -53,7 +59,8 @@ export const handler: EaCRuntimeHandlerSet<
       OIAPIToken: ctx.State.OIJWT,
       OILicense: ctx.State.UserLicenses?.['o-industrial'],
       AccessRights: appCtx.Runtime.AccessRights ?? [],
-      DeployAccessRight: Deno.env.get('DEPLOY_ACCESS_RIGHT_LOOKUP') || 'Workspace.Deploy',
+      DeployAccessRight:
+        Deno.env.get('DEPLOY_ACCESS_RIGHT_LOOKUP') || 'Workspace.Deploy',
       Username: ctx.State.Username,
       Workspace: ctx.State.Workspace!,
       AziCircuitUrl: Deno.env.get('AZI_MAIN_CIRCUIT_URL')!,
@@ -76,15 +83,16 @@ export default function WorkspacePage({
     AziWarmQueryCircuitUrl: aziWarmQueryUrl,
   },
 }: PageProps<WorkspacePageData>) {
+  // return <>Running2</>;
   const origin = location?.origin ?? 'https://server.com';
   const root = `${origin}${oiApiRoot}`;
   const oiSvc = useMemo(
     () => new OpenIndustrialAPIClient(new URL(root), oiApiToken),
-    [],
+    []
   );
 
   const [workspaceMgr, setWorkspaceMgr] = useState<WorkspaceManager | null>(
-    null,
+    null
   );
 
   // ⏬ Load capabilities pack from dynamic endpoint
@@ -111,13 +119,14 @@ export default function WorkspacePage({
           Username,
           oiLicense,
           oiSvc,
+          // { surface: [], workspace: [] }, 
           capabilities,
           'workspace',
           aziUrl,
           aziWarmQueryUrl,
           undefined,
           accessRights,
-          oiApiToken,
+          oiApiToken
         );
 
         setWorkspaceMgr(mgr);
@@ -161,8 +170,8 @@ export default function WorkspacePage({
 
   const onDeployClick = canDeploy
     ? async () => {
-      await history.deploy();
-    }
+        await history.deploy();
+      }
     : undefined;
 
   return (
@@ -195,16 +204,16 @@ export default function WorkspacePage({
           // onSettingsClick={() => setShowWorkspaceSettings(true)}
         />
       }
-      commitStatus={showCommitPanel
-        ? (
+      commitStatus={
+        showCommitPanel ? (
           <CommitStatusPanel
             commits={commits}
             selectedCommitId={selectedCommitId ?? undefined}
             onSelectCommit={selectCommit}
             onClose={toggleCommitPanel}
           />
-        )
-        : undefined}
+        ) : undefined
+      }
       inspector={<InspectorPanel workspaceMgr={workspaceMgr} />}
       stream={<StreamPanel workspaceMgr={workspaceMgr} />}
       timeline={<TimelinePanel />}

@@ -113,14 +113,14 @@ export function buildOpenIndustrialRuntimeMiddleware(
         },
         Actuators: loadEaCActuators(),
         Packs: {
-          AzureIoT: {
-            Details: {
-              Path: '@o-industrial/common/packs/azure-iot',
-            },
-          },
+          // AzureIoT: {
+          //   Details: {
+          //     Path: '@o-industrial/azure-iot-pack',
+          //   },
+          // },
           OICore: {
             Details: {
-              Path: '@o-industrial/common/packs/oi-core',
+              Path: '@o-industrial/oi-core-pack',
             },
           },
         },

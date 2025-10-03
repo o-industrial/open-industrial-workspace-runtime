@@ -5,7 +5,7 @@ import { CommitStatusPanel } from '@o-industrial/common/atomic/organisms';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
 import { WorkspaceManager } from '@o-industrial/common/flow';
 import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
-import OICore from '@o-industrial/common/packs/oi-core';
+// import OICore from '@o-industrial/oi-core-pack';
 import { IoCContainer } from '@fathym/ioc';
 import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { EaCUserLicense } from '@fathym/eac-licensing';
@@ -69,22 +69,22 @@ export default function CommitStatusPage({
     (async () => {
       const ioc = new IoCContainer();
       ioc.Register(OpenIndustrialAPIClient, () => oiSvc);
-      const capabilities = (await OICore.Build(ioc)).Capabilities!;
+      // const capabilities = (await OICore.Build(ioc)).Capabilities!;
 
-      const mgr = new WorkspaceManager(
-        Workspace,
-        Username,
-        OILicense,
-        oiSvc,
-        capabilities,
-        'workspace',
-        AziCircuitUrl,
-        AziWarmQueryCircuitUrl,
-        undefined,
-        undefined,
-        OIAPIToken,
-      );
-      setWorkspaceMgr(mgr);
+      // const mgr = new WorkspaceManager(
+      //   Workspace,
+      //   Username,
+      //   OILicense,
+      //   oiSvc,
+      //   capabilities,
+      //   'workspace',
+      //   AziCircuitUrl,
+      //   AziWarmQueryCircuitUrl,
+      //   undefined,
+      //   undefined,
+      //   OIAPIToken,
+      // );
+      // setWorkspaceMgr(mgr);
     })();
   }, []);
 
