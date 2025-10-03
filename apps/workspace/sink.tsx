@@ -13,7 +13,7 @@ import {
 } from '@o-industrial/atomic/icons';
 import { IntentTypes } from '@o-industrial/common/types';
 import { Action, ActionStyleTypes, LineSparkSVG } from '@o-industrial/atomic/atoms';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 
 // deno-lint-ignore ban-types
 type IndexPageData = {};
@@ -340,5 +340,6 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
     </>
   );
 }
+
 
 

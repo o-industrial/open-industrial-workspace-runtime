@@ -1,5 +1,5 @@
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 
 export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
   GET: async (_req, ctx) => {
@@ -7,3 +7,4 @@ export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
     return Response.json({ connected: !!token });
   },
 };
+

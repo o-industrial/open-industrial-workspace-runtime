@@ -1,7 +1,7 @@
 import { EaCStatusProcessingTypes } from '@fathym/eac/steward/status';
 import { EaCRuntimeHandlers } from '@fathym/eac/runtime/pipelines';
 import type { EaCCloudAzureDetails } from '@fathym/eac-azure';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 
 type ManagedSubscriptionRequest = {
   name?: string;
@@ -84,3 +84,4 @@ export const handler: EaCRuntimeHandlers<OpenIndustrialWebState> = {
     }
   },
 };
+

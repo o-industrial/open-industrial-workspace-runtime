@@ -1,5 +1,5 @@
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 
 type SetActiveReq = {
   EnterpriseLookup?: string;
@@ -62,3 +62,4 @@ export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
 };
 
 export default handler;
+

@@ -2,7 +2,7 @@ import { redirectRequest } from '@fathym/common';
 import type { EaCCloudAzureDetails } from '@fathym/eac-azure';
 import { EaCStatusProcessingTypes } from '@fathym/eac/steward/status';
 import { EaCRuntimeHandlers } from '@fathym/eac/runtime/pipelines';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 
 export const handler: EaCRuntimeHandlers<OpenIndustrialWebState> = {
   async POST(req, ctx) {
@@ -56,3 +56,4 @@ export const handler: EaCRuntimeHandlers<OpenIndustrialWebState> = {
     }
   },
 };
+

@@ -5,7 +5,7 @@ import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
 import { OpenIndustrialJWTPayload } from '@o-industrial/common/types';
 
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { AgreementManager } from '../../src/agreements/AgreementManager.ts';
 // import { agreementsBlockerMiddleware } from '../../src/agreements/agreementsBlockerMiddleware.ts';
 import { loadEaCActuators } from '../../configs/eac-actuators.config.ts';
@@ -251,3 +251,4 @@ export function buildAgreementsRedirectMiddleware(): EaCRuntimeHandler<OpenIndus
     return ctx.Next();
   };
 }
+

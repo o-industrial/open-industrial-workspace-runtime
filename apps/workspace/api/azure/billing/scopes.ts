@@ -1,5 +1,5 @@
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { EaCAzureAPIClient, loadEaCAzureAPISvc } from '@fathym/eac-azure/steward/clients';
 
 type AgreementType = string;
@@ -116,3 +116,4 @@ export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
 };
 
 export default handler;
+

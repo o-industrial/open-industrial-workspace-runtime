@@ -23,7 +23,7 @@ import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
 import { IoCContainer } from '@fathym/ioc';
 import { EverythingAsCode } from '@fathym/eac';
 import { EaCUserLicense, EverythingAsCodeLicensing } from '@fathym/eac-licensing';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { EaCApplicationsRuntimeContext } from '@fathym/eac-applications/runtime';
 import { EverythingAsCodeClouds } from '@fathym/eac-azure';
 
@@ -258,4 +258,5 @@ export default function WorkspacePage({
     </RuntimeWorkspaceDashboardTemplate>
   );
 }
+
 
