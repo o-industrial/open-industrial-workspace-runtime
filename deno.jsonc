@@ -88,7 +88,7 @@
 
     "@o-industrial/common/runtimes": "../open-industrial-reference-architecture/src/runtimes/.exports.ts",
 
-    "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.7",
+    "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.10-integration",
     // "@o-industrial/oi-core-pack": "../oi-core-pack/src/.pack.ts",
 
     "preact": "npm:preact@10.20.1",
