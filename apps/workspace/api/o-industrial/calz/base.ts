@@ -35,4 +35,3 @@ export const handler: EaCRuntimeHandlers<OpenIndustrialWebState> = {
 };
 
 export default handler;
-

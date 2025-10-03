@@ -251,4 +251,3 @@ export function buildAgreementsRedirectMiddleware(): EaCRuntimeHandler<OpenIndus
     return ctx.Next();
   };
 }
-

@@ -67,4 +67,3 @@ Authenticated portal for managing workspaces, Azure onboarding, commits, and lic
 
 - Update after major workflow changes (workspace provisioning, Azure onboarding) or auth adjustments.
 - Maintain release notes for workspace operators and support teams.
-

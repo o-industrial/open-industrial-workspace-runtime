@@ -19,4 +19,3 @@ export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
     return redirectRequest(ctx.Runtime.URLMatch.Base, false, false);
   },
 };
-

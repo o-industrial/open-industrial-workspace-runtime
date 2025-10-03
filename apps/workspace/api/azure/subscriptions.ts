@@ -12,4 +12,3 @@ export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
     return Response.json(subs);
   },
 };
-

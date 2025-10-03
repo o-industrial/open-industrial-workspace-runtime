@@ -9,4 +9,3 @@ export const handler: EaCRuntimeHandlerSet<
     return Response.json(ctx.State.Workspace);
   },
 };
-

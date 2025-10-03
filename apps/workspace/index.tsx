@@ -160,37 +160,6 @@ export default function WorkspacePage({
     eac,
   );
 
-  const I = {
-    // existing
-    save: 'https://api.iconify.design/lucide:save.svg',
-    fork: 'https://api.iconify.design/lucide:git-fork.svg',
-    archive: 'https://api.iconify.design/lucide:archive.svg',
-    export: 'https://api.iconify.design/lucide:download.svg',
-    eye: 'https://api.iconify.design/lucide:eye.svg',
-    check: 'https://api.iconify.design/lucide:check.svg',
-    commit: 'https://api.iconify.design/lucide:git-commit.svg',
-
-    // from your icon map
-    settings: 'https://api.iconify.design/lucide:settings.svg',
-    users: 'https://api.iconify.design/lucide:users.svg',
-    link: 'https://api.iconify.design/mdi:link-variant.svg',
-    lock: 'https://api.iconify.design/lucide:lock.svg',
-    warmQuery: 'https://api.iconify.design/mdi:sql-query.svg',
-    key: 'https://api.iconify.design/lucide:key.svg',
-    stack: 'https://api.iconify.design/lucide:layers-3.svg',
-    dollar: 'https://api.iconify.design/lucide:dollar-sign.svg',
-
-    // sensible additions (lucide)
-    cloud: 'https://api.iconify.design/lucide:cloud.svg',
-    cloudAttach: 'https://api.iconify.design/lucide:cloud-upload.svg',
-    privateCloud: 'https://api.iconify.design/lucide:server.svg',
-    license: 'https://api.iconify.design/lucide:badge-check.svg',
-    creditCard: 'https://api.iconify.design/lucide:credit-card.svg',
-  } as const;
-
-  const hasWorkspaceCloud = !!eac.Clouds?.Workspace?.Details ||
-    Object.keys(eac.Clouds || {}).length > 0;
-
   const history = workspaceMgr.UseHistory();
 
   // Determine deploy capability based on a specific access right if configured; otherwise fallback to license
@@ -258,5 +227,3 @@ export default function WorkspacePage({
     </RuntimeWorkspaceDashboardTemplate>
   );
 }
-
-

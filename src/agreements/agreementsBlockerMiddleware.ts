@@ -50,4 +50,3 @@ export const agreementsBlockerMiddleware: EaCRuntimeHandler<
 
   return ctx.Next();
 };
-
