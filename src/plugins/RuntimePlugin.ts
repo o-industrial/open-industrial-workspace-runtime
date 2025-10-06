@@ -2,7 +2,10 @@ import { EaCAtomicIconsProcessor } from '@fathym/atomic-icons';
 import { FathymAtomicIconsPlugin } from '@fathym/atomic-icons/plugin';
 import { DefaultWorkspaceProcessorHandlerResolver } from './DefaultWorkspaceProcessorHandlerResolver.ts';
 import { IoCContainer } from '@fathym/ioc';
-import { EaCRuntimeConfig, EaCRuntimePluginConfig } from '@fathym/eac/runtime/config';
+import {
+  EaCRuntimeConfig,
+  EaCRuntimePluginConfig,
+} from '@fathym/eac/runtime/config';
 import { EaCRuntimePlugin } from '@fathym/eac/runtime/plugins';
 import { EverythingAsCode } from '@fathym/eac';
 import { EverythingAsCodeApplications } from '@fathym/eac-applications';
@@ -24,7 +27,10 @@ import {
   EaCJSRDistributedFileSystemDetails,
   EaCLocalDistributedFileSystemDetails,
 } from '@fathym/eac/dfs';
-import { EaCAzureADB2CProviderDetails, EaCAzureADProviderDetails } from '@fathym/eac-identity';
+import {
+  EaCAzureADB2CProviderDetails,
+  EaCAzureADProviderDetails,
+} from '@fathym/eac-identity';
 import {
   OpenIndustrialLicensingPlugin,
   OpenIndustrialMSALPlugin,
@@ -51,7 +57,8 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
           core: {
             Details: {
               Name: 'Open Industrial Workspace Runtime',
-              Description: 'Dedicated runtime hosting Open Industrial workspace experiences.',
+              Description:
+                'Dedicated runtime hosting Open Industrial workspace experiences.',
               Priority: 100,
             },
             ResolverConfigs: {
@@ -134,8 +141,12 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               CacheControl: {
                 'text/html': `private, max-age=${60 * 5}`,
                 'image/': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
-                'application/javascript': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
-                'application/typescript': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
+                'application/javascript': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
+                'application/typescript': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
                 'text/css': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
               },
             } as EaCDFSProcessor,
@@ -143,7 +154,8 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
           atomicIcons: {
             Details: {
               Name: 'Atomic Icons',
-              Description: 'Iconset assets leveraged across workspace surfaces.',
+              Description:
+                'Iconset assets leveraged across workspace surfaces.',
             },
             ModifierResolvers: {},
             Processor: {
@@ -231,7 +243,8 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               Type: 'DenoKV',
               Name: 'Open Industrial',
               Description: 'Workspace cache for the workspace runtime.',
-              DenoKVPath: Deno.env.get('OPEN_INDUSTRIAL_DENO_KV_PATH') || undefined,
+              DenoKVPath:
+                Deno.env.get('OPEN_INDUSTRIAL_DENO_KV_PATH') || undefined,
             } as EaCDenoKVDetails,
           },
         },
@@ -270,7 +283,8 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'BaseHREF',
               Name: 'Base HREF',
-              Description: 'Adjusts the base HREF of a response based on configuration.',
+              Description:
+                'Adjusts the base HREF of a response based on configuration.',
             } as EaCBaseHREFModifierDetails,
           },
           googleTagMgr: {
@@ -293,9 +307,10 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'MSAppInsights',
               Name: 'Microsoft Application Insights',
-              Description: 'Adds Microsoft Azure Application Insights instrumentation.',
+              Description:
+                'Adds Microsoft Azure Application Insights instrumentation.',
               InstrumentationKey: Deno.env.get(
-                'APP_INSIGHTS_INSTRUMENTATION_KEY',
+                'APP_INSIGHTS_INSTRUMENTATION_KEY'
               )!,
             } as EaCMSAppInsightsModifierDetails,
           },
