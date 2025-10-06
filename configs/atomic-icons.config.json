@@ -15,7 +15,6 @@
       "surface": "https://api.iconify.design/mdi:layers-outline.svg",
       "triggerMatch": "https://api.iconify.design/lucide:zap.svg",
       "warmQuery": "https://api.iconify.design/mdi:sql-query.svg",
-
       "archive": "https://api.iconify.design/lucide:archive.svg",
       "commit": "https://api.iconify.design/lucide:git-commit.svg",
       "delete": "https://api.iconify.design/lucide:trash-2.svg",
@@ -24,13 +23,11 @@
       "revert": "https://api.iconify.design/lucide:rotate-ccw.svg",
       "save": "https://api.iconify.design/lucide:save.svg",
       "undo": "https://api.iconify.design/lucide:undo.svg",
-
       "expand": "https://api.iconify.design/lucide:arrow-left-from-line.svg",
       "fitView": "https://api.iconify.design/lucide:maximize.svg",
       "resetZoom": "https://api.iconify.design/lucide:refresh-cw.svg",
       "zoomIn": "https://api.iconify.design/lucide:plus.svg",
       "zoomOut": "https://api.iconify.design/lucide:minus.svg",
-
       "close": "https://api.iconify.design/lucide:x.svg",
       "loading": "https://api.iconify.design/lucide:loader-2.svg",
       "map": "https://api.iconify.design/lucide:map.svg",
@@ -40,7 +37,8 @@
       "send": "https://api.iconify.design/lucide:send.svg",
       "settings": "https://api.iconify.design/lucide:settings.svg",
       "users": "https://api.iconify.design/lucide:users.svg",
-
+      "copy": "https://api.iconify.design/lucide:copy.svg",
+      "check": "https://api.iconify.design/lucide:check.svg",
       "runtime": "https://api.iconify.design/lucide:cpu.svg",
       "build": "https://api.iconify.design/lucide:hammer.svg",
       "blocked": "https://api.iconify.design/lucide:shield-alert.svg",
@@ -59,7 +57,8 @@
       "install": "https://api.iconify.design/lucide:download.svg",
       "walkthrough": "https://api.iconify.design/lucide:compass.svg",
       "stack": "https://api.iconify.design/lucide:layers-3.svg",
-      "timeline": "https://api.iconify.design/lucide:list-tree.svg"
+      "timeline": "https://api.iconify.design/lucide:list-tree.svg",
+      "interface": "https://api.iconify.design/lucide:layout-dashboard.svg"
     }
   },
   "Generate": false,
