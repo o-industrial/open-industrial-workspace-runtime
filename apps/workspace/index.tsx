@@ -139,14 +139,14 @@ export default function WorkspacePage({
 
   const pathParts = workspaceMgr.UseBreadcrumb();
 
-  const {
-    commits,
-    badgeState,
-    showCommitPanel,
-    toggleCommitPanel,
-    selectedCommitId,
-    selectCommit,
-  } = workspaceMgr.UseCommits();
+  const commitStore = workspaceMgr.UseCommits();
+  const [showCommitPanel, setShowCommitPanel] = useState(false);
+
+  useEffect(() => {
+    commitStore.load().catch((err) => {
+      console.warn('[WorkspacePage] Failed to load commit statuses', err);
+    });
+  }, [commitStore]);
 
   const eac:
     & EverythingAsCode
@@ -182,11 +182,11 @@ export default function WorkspacePage({
         <AppFrameBar
           hasWorkspaceChanges={history.hasChanges}
           menus={runtimeMenus}
-          commitBadgeState={badgeState}
+          commitStore={commitStore}
           isDeploying={history.isDeploying}
           onMenuOption={handleMenu}
           onActivateClick={onActivateClick}
-          onCommitClick={toggleCommitPanel}
+          onCommitClick={() => setShowCommitPanel((prev) => !prev)}
           onDeployClick={onDeployClick}
           onProfileClick={() => showAccProf()}
           // onSettingsClick={() => showWkspSets()}
@@ -208,10 +208,8 @@ export default function WorkspacePage({
       commitStatus={showCommitPanel
         ? (
           <CommitStatusPanel
-            commits={commits}
-            selectedCommitId={selectedCommitId ?? undefined}
-            onSelectCommit={selectCommit}
-            onClose={toggleCommitPanel}
+            store={commitStore}
+            onClose={() => setShowCommitPanel(false)}
           />
         )
         : undefined}
