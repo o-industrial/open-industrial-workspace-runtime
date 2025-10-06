@@ -108,7 +108,9 @@ export default function WorkspacePage({
 
         const ioc = new IoCContainer();
 
-        ioc.Register(OpenIndustrialAPIClient, () => oiSvc);
+        ioc.Register(OpenIndustrialAPIClient, () => oiSvc, {
+          Type: ioc.Symbol('OpenIndustrialAPIClient')
+        });
 
         const capabilities = (await OICore.Build(ioc)).Capabilities!;
 
