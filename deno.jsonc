@@ -77,6 +77,7 @@
     // "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.23",
     "@o-industrial/oi-core-pack": "../oi-core-pack/src/.pack.ts",
     "@o-industrial/oi-core-pack/runtime/workspace-app-menu": "../oi-core-pack/src/runtime/workspaceAppMenu.tsx",
+    "@fathym/code-editor": "../code-editor/mod.ts",
 
     "preact": "npm:preact@10.20.1",
     "react": "npm:preact@10.20.1/compat",

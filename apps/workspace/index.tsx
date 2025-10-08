@@ -88,7 +88,7 @@ export default function WorkspacePage({
     () => new OpenIndustrialAPIClient(new URL(root), oiApiToken),
     [],
   );
-
+  
   const [workspaceMgr, setWorkspaceMgr] = useState<WorkspaceManager | null>(
     null,
   );
