@@ -50,7 +50,10 @@
     "@fathym/eac-azure": "jsr:@fathym/eac-azure@0.0.115",
     "@fathym/eac-deno-kv": "jsr:@fathym/eac-deno-kv@0.0.25",
     "@fathym/eac-identity": "jsr:@fathym/eac-identity@0.0.28",
-    "@fathym/msal": "jsr:@fathym/msal@0.0.58",
+
+    // "@fathym/msal": "jsr:@fathym/msal@0.0.58",
+    "@fathym/msal": "../msal/mod.ts",
+    
     "@fathym/ioc": "jsr:@fathym/ioc@0.0.15",
 
     "@fathym/eac-licensing": "jsr:@fathym/eac-licensing@0.0.58",
@@ -59,7 +62,7 @@
     // "@fathym/eac-licensing/steward/api": "../eac-licensing/src/steward/api/.exports.ts",
     // "@fathym/eac-licensing/steward/plugins": "../eac-licensing/src/steward/plugins/.exports.ts",
 
-    // "@o-industrial/common": "jsr:@o-industrial/common@0.0.479",
+    // "@o-industrial/common": "jsr:@o-industrial/common@0.0.488-hmis",
     "@o-industrial/common/api": "../open-industrial-reference-architecture/src/api/.exports.ts",
     "@o-industrial/common/eac": "../open-industrial-reference-architecture/src/eac/.exports.ts",
     "@o-industrial/common/flow": "../open-industrial-reference-architecture/src/flow/.exports.ts",
@@ -74,7 +77,7 @@
     "@o-industrial/atomic/templates": "../open-industrial-atomic/src/templates/.exports.ts",
     "@o-industrial/atomic/tailwind/preset": "../open-industrial-atomic/configs/tailwind/preset.ts",
 
-    // "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.23",
+    // "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.34-hmis",
     "@o-industrial/oi-core-pack": "../oi-core-pack/src/.pack.ts",
     "@o-industrial/oi-core-pack/runtime/workspace-app-menu": "../oi-core-pack/src/runtime/workspaceAppMenu.tsx",
     "@fathym/code-editor": "../code-editor/mod.ts",

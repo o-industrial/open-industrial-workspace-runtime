@@ -57,11 +57,11 @@ export default function CommitStatusPage({
   const root = `${origin}${OIAPIRoot}`;
   const oiSvc = useMemo(
     () => new OpenIndustrialAPIClient(new URL(root), OIAPIToken),
-    []
+    [],
   );
 
   const [workspaceMgr, setWorkspaceMgr] = useState<WorkspaceManager | null>(
-    null
+    null,
   );
   const [status, setStatus] = useState<unknown>(null);
 
@@ -84,7 +84,7 @@ export default function CommitStatusPage({
         AziWarmQueryCircuitUrl,
         undefined,
         undefined,
-        OIAPIToken
+        OIAPIToken,
       );
       setWorkspaceMgr(mgr);
     })();
@@ -101,14 +101,14 @@ export default function CommitStatusPage({
 
   if (!status) {
     return (
-      <div class="w-full h-full flex items-center justify-center">
+      <div class='w-full h-full flex items-center justify-center'>
         Loading commit...
       </div>
     );
   }
 
   return (
-    <div class="w-full h-full">
+    <div class='w-full h-full'>
       <CommitStatusPanel commit={status} />
     </div>
   );

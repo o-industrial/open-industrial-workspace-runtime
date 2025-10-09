@@ -102,7 +102,6 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               msal: {
                 PathPattern: '/azure/*',
                 Priority: 600,
-                IsPrivate: true,
               },
               oauth: {
                 PathPattern: '/oauth/*',

@@ -88,7 +88,7 @@ export default function WorkspacePage({
     () => new OpenIndustrialAPIClient(new URL(root), oiApiToken),
     [],
   );
-  
+
   const [workspaceMgr, setWorkspaceMgr] = useState<WorkspaceManager | null>(
     null,
   );
@@ -109,7 +109,7 @@ export default function WorkspacePage({
         const ioc = new IoCContainer();
 
         ioc.Register(OpenIndustrialAPIClient, () => oiSvc, {
-          Type: ioc.Symbol('OpenIndustrialAPIClient')
+          Type: ioc.Symbol('OpenIndustrialAPIClient'),
         });
 
         const capabilities = (await OICore.Build(ioc)).Capabilities!;
