@@ -1,5 +1,5 @@
 import { EaCRuntimeHandler } from '@fathym/eac/runtime/pipelines';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { redirectRequest } from '@fathym/common';
 import { AgreementManager } from './AgreementManager.ts';
 

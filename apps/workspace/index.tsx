@@ -3,7 +3,7 @@ import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { PageProps } from '@fathym/eac-applications/preact';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
 import { WorkspaceManager } from '@o-industrial/common/flow';
-import { AppFrameBar, BreadcrumbBar } from '@o-industrial/common/atomic/molecules';
+import { AppFrameBar, BreadcrumbBar } from '@o-industrial/atomic/molecules';
 import {
   AziPanel,
   CommitStatusPanel,
@@ -11,16 +11,21 @@ import {
   InspectorPanel,
   StreamPanel,
   TimelinePanel,
-} from '@o-industrial/common/atomic/organisms';
-import { RuntimeWorkspaceDashboardTemplate } from '@o-industrial/common/atomic/templates';
-import OICore from '@o-industrial/common/packs/oi-core';
+} from '@o-industrial/atomic/organisms';
+import { RuntimeWorkspaceDashboardTemplate } from '@o-industrial/atomic/templates';
+import OICore from '@o-industrial/oi-core-pack';
+import {
+  createWorkspaceAppMenu,
+  getWorkspaceRuntimeMenus,
+} from '@o-industrial/oi-core-pack/runtime/workspace-app-menu';
 import { marked } from 'npm:marked@15.0.1';
 import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
 import { IoCContainer } from '@fathym/ioc';
 import { EverythingAsCode } from '@fathym/eac';
 import { EaCUserLicense, EverythingAsCodeLicensing } from '@fathym/eac-licensing';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { EaCApplicationsRuntimeContext } from '@fathym/eac-applications/runtime';
+import { EverythingAsCodeClouds } from '@fathym/eac-azure';
 
 export const IsIsland = true;
 
@@ -76,6 +81,7 @@ export default function WorkspacePage({
     AziWarmQueryCircuitUrl: aziWarmQueryUrl,
   },
 }: PageProps<WorkspacePageData>) {
+  // return <>Running2</>;
   const origin = location?.origin ?? 'https://server.com';
   const root = `${origin}${oiApiRoot}`;
   const oiSvc = useMemo(
@@ -102,7 +108,9 @@ export default function WorkspacePage({
 
         const ioc = new IoCContainer();
 
-        ioc.Register(OpenIndustrialAPIClient, () => oiSvc);
+        ioc.Register(OpenIndustrialAPIClient, () => oiSvc, {
+          Type: ioc.Symbol('OpenIndustrialAPIClient')
+        });
 
         const capabilities = (await OICore.Build(ioc)).Capabilities!;
 
@@ -111,6 +119,7 @@ export default function WorkspacePage({
           Username,
           oiLicense,
           oiSvc,
+          // { surface: [], workspace: [] },
           capabilities,
           'workspace',
           aziUrl,
@@ -132,23 +141,26 @@ export default function WorkspacePage({
 
   const pathParts = workspaceMgr.UseBreadcrumb();
 
-  const {
-    commits,
-    badgeState,
-    showCommitPanel,
-    toggleCommitPanel,
-    selectedCommitId,
-    selectCommit,
-  } = workspaceMgr.UseCommits();
+  const commitStore = workspaceMgr.UseCommits();
+  const [showCommitPanel, setShowCommitPanel] = useState(false);
 
-  const {
-    handleMenu,
-    modals,
-    showSimLib,
-    showAccProf,
-    showLicense,
-    runtimeMenus,
-  } = workspaceMgr.UseAppMenu(ParentEaC);
+  useEffect(() => {
+    commitStore.load().catch((err) => {
+      console.warn('[WorkspacePage] Failed to load commit statuses', err);
+    });
+  }, [commitStore]);
+
+  const eac:
+    & EverythingAsCode
+    & EverythingAsCodeLicensing
+    & EverythingAsCodeClouds = ParentEaC;
+
+  const runtimeMenus = getWorkspaceRuntimeMenus(eac);
+
+  const { handleMenu, modals, showSimLib, showAccProf, showLicense } = createWorkspaceAppMenu(
+    workspaceMgr,
+    eac,
+  );
 
   const history = workspaceMgr.UseHistory();
 
@@ -172,11 +184,11 @@ export default function WorkspacePage({
         <AppFrameBar
           hasWorkspaceChanges={history.hasChanges}
           menus={runtimeMenus}
-          commitBadgeState={badgeState}
+          commitStore={commitStore}
           isDeploying={history.isDeploying}
           onMenuOption={handleMenu}
           onActivateClick={onActivateClick}
-          onCommitClick={toggleCommitPanel}
+          onCommitClick={() => setShowCommitPanel((prev) => !prev)}
           onDeployClick={onDeployClick}
           onProfileClick={() => showAccProf()}
           // onSettingsClick={() => showWkspSets()}
@@ -198,10 +210,8 @@ export default function WorkspacePage({
       commitStatus={showCommitPanel
         ? (
           <CommitStatusPanel
-            commits={commits}
-            selectedCommitId={selectedCommitId ?? undefined}
-            onSelectCommit={selectCommit}
-            onClose={toggleCommitPanel}
+            store={commitStore}
+            onClose={() => setShowCommitPanel(false)}
           />
         )
         : undefined}

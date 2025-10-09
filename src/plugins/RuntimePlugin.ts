@@ -189,7 +189,7 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             },
             Processor: {
               Type: 'Tailwind',
-              DFSLookups: ['local:apps/workspace', 'jsr:@o-industrial/common'],
+              DFSLookups: ['local:apps/workspace', 'jsr:@o-industrial/atomic'],
               ConfigPath: './tailwind.config.ts',
               StylesTemplatePath: './apps/tailwind/styles.css',
               CacheControl: {
@@ -212,7 +212,7 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               AppDFSLookup: 'local:apps/workspace',
               ComponentDFSLookups: [
                 ['local:apps/workspace', ['tsx']],
-                ['jsr:@o-industrial/common', ['tsx']],
+                ['jsr:@o-industrial/atomic', ['tsx']],
               ],
             } as EaCPreactAppProcessor,
           },
@@ -256,10 +256,10 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               Extensions: ['tsx'],
             } as EaCLocalDistributedFileSystemDetails,
           },
-          'jsr:@o-industrial/common': {
+          'jsr:@o-industrial/atomic': {
             Details: {
               Type: 'JSR',
-              Package: '@o-industrial/common',
+              Package: '@o-industrial/atomic',
               Version: '',
               Extensions: ['tsx'],
             } as EaCJSRDistributedFileSystemDetails,

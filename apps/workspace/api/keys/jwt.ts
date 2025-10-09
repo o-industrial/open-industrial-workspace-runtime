@@ -1,7 +1,7 @@
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { loadJwtConfig } from '@fathym/common';
 
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { OpenIndustrialJWTPayload } from '@o-industrial/common/types';
 import { EaCApplicationsRuntimeContext } from '@fathym/eac-applications/runtime';
 

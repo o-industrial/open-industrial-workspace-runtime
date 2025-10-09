@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { PageProps } from '@fathym/eac-applications/preact';
-import { CommitStatusPanel } from '@o-industrial/common/atomic/organisms';
+import { CommitStatusPanel } from '@o-industrial/atomic/organisms';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
 import { WorkspaceManager } from '@o-industrial/common/flow';
 import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
-import OICore from '@o-industrial/common/packs/oi-core';
+import OICore from '@o-industrial/oi-core-pack';
 import { IoCContainer } from '@fathym/ioc';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { EaCUserLicense } from '@fathym/eac-licensing';
 
 export const IsIsland = true;
@@ -57,18 +57,20 @@ export default function CommitStatusPage({
   const root = `${origin}${OIAPIRoot}`;
   const oiSvc = useMemo(
     () => new OpenIndustrialAPIClient(new URL(root), OIAPIToken),
-    [],
+    []
   );
 
   const [workspaceMgr, setWorkspaceMgr] = useState<WorkspaceManager | null>(
-    null,
+    null
   );
   const [status, setStatus] = useState<unknown>(null);
 
   useEffect(() => {
     (async () => {
       const ioc = new IoCContainer();
-      ioc.Register(OpenIndustrialAPIClient, () => oiSvc);
+      ioc.Register(OpenIndustrialAPIClient, () => oiSvc, {
+        Type: ioc.Symbol('OpenIndustrialAPIClient'),
+      });
       const capabilities = (await OICore.Build(ioc)).Capabilities!;
 
       const mgr = new WorkspaceManager(
@@ -82,7 +84,7 @@ export default function CommitStatusPage({
         AziWarmQueryCircuitUrl,
         undefined,
         undefined,
-        OIAPIToken,
+        OIAPIToken
       );
       setWorkspaceMgr(mgr);
     })();
@@ -99,14 +101,14 @@ export default function CommitStatusPage({
 
   if (!status) {
     return (
-      <div class='w-full h-full flex items-center justify-center'>
+      <div class="w-full h-full flex items-center justify-center">
         Loading commit...
       </div>
     );
   }
 
   return (
-    <div class='w-full h-full'>
+    <div class="w-full h-full">
       <CommitStatusPanel commit={status} />
     </div>
   );

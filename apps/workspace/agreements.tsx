@@ -1,8 +1,8 @@
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { PageProps } from '@fathym/eac-applications/preact';
-import { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
+import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { AgreementManager } from '../../src/agreements/AgreementManager.ts';
-import { AgreementData, AgreementList } from '@o-industrial/common/atomic/organisms';
+import { AgreementData, AgreementList } from '@o-industrial/atomic/organisms';
 
 export const IsIsland = true;
 

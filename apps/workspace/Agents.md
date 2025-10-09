@@ -28,7 +28,7 @@ Authenticated portal for managing workspaces, Azure onboarding, commits, and lic
 ## Patterns
 
 - Pair UI routes with pi/ handlers; use Response.redirect(..., 303) after successful writes.
-- Pull shared UI from @o-industrial/common/atomic/*; avoid bespoke markup.
+- Pull shared UI from @o-industrial/atomic/*; avoid bespoke markup.
 - Access control depends on OpenIndustrialLicensingPlugin + OpenIndustrialMSALPlugin wired in src/plugins/RuntimePlugin.ts.
 - Agreements middleware blocks access until all required terms accepted.
 
