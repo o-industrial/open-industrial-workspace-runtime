@@ -73,13 +73,21 @@ export default function CommitStatusPage({
       });
       const capabilities = (await OICore.Build(ioc)).Capabilities!;
 
+      const persistedScope = WorkspaceManager.ResolvePersistedScope(
+        Workspace,
+        Username,
+      );
+      const initialScope = persistedScope?.Scope ?? 'workspace';
+      const initialScopeLookup = persistedScope?.Lookup;
+
       const mgr = new WorkspaceManager(
         Workspace,
         Username,
         OILicense,
         oiSvc,
         capabilities,
-        'workspace',
+        initialScope,
+        initialScopeLookup,
         AziCircuitUrl,
         AziWarmQueryCircuitUrl,
         undefined,

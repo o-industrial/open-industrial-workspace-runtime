@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'preact/hooks';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { PageProps } from '@fathym/eac-applications/preact';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
-import { WorkspaceManager } from '@o-industrial/common/flow';
+import { NodeScopeTypes, WorkspaceManager } from '@o-industrial/common/flow';
 import { AppFrameBar, BreadcrumbBar } from '@o-industrial/atomic/molecules';
 import {
   AziPanel,
@@ -114,6 +114,13 @@ export default function WorkspacePage({
 
         const capabilities = (await OICore.Build(ioc)).Capabilities!;
 
+        const persistedScope = WorkspaceManager.ResolvePersistedScope(
+          initialEaC,
+          Username,
+        );
+        const initialScope: NodeScopeTypes = persistedScope?.Scope ?? 'workspace';
+        const initialScopeLookup = persistedScope?.Lookup;
+
         const mgr = new WorkspaceManager(
           initialEaC,
           Username,
@@ -121,7 +128,8 @@ export default function WorkspacePage({
           oiSvc,
           // { surface: [], workspace: [] },
           capabilities,
-          'workspace',
+          initialScope,
+          initialScopeLookup,
           aziUrl,
           aziWarmQueryUrl,
           undefined,
