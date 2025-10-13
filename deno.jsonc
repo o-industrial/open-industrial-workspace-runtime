@@ -30,7 +30,7 @@
     "@fathym/atomic-icons": "jsr:@fathym/atomic-icons@0.0.103",
     "@fathym/eac": "jsr:@fathym/eac@0.2.131",
 
-    // "@fathym/eac-applications": "jsr:@fathym/eac-applications@0.0.205",
+    // "@fathym/eac-applications": "jsr:@fathym/eac-applications@0.0.208",
     "@fathym/eac-applications": "../eac-applications/src/applications/.exports.ts",
     "@fathym/eac-applications/modifiers": "../eac-applications/src/applications/modifiers/.exports.ts",
     "@fathym/eac-applications/preact": "../eac-applications/src/preact/.exports.ts",
@@ -62,7 +62,7 @@
     // "@fathym/eac-licensing/steward/api": "../eac-licensing/src/steward/api/.exports.ts",
     // "@fathym/eac-licensing/steward/plugins": "../eac-licensing/src/steward/plugins/.exports.ts",
 
-    // "@o-industrial/common": "jsr:@o-industrial/common@0.0.493",
+    // "@o-industrial/common": "jsr:@o-industrial/common@0.0.495",
     "@o-industrial/common/api": "../open-industrial-reference-architecture/src/api/.exports.ts",
     "@o-industrial/common/eac": "../open-industrial-reference-architecture/src/eac/.exports.ts",
     "@o-industrial/common/flow": "../open-industrial-reference-architecture/src/flow/.exports.ts",
