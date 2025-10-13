@@ -76,6 +76,7 @@
     "@o-industrial/atomic/organisms": "../open-industrial-atomic/src/organisms/.exports.ts",
     "@o-industrial/atomic/templates": "../open-industrial-atomic/src/templates/.exports.ts",
     "@o-industrial/atomic/tailwind/preset": "../open-industrial-atomic/configs/tailwind/preset.ts",
+    "@o-industrial/atomic/utils": "../open-industrial-atomic/src/utils/.exports.ts",
 
     // "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.42",
     "@o-industrial/oi-core-pack": "../oi-core-pack/src/.pack.ts",
