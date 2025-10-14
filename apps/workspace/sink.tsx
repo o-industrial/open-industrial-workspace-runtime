@@ -232,7 +232,8 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
           </div>
         </div>
 
-        {/* <div class='space-y-8 mt-16'>
+        {
+          /* <div class='space-y-8 mt-16'>
           <h1 class='text-2xl font-bold mb-6'>LineSparkSVG Demo Grid</h1>
 
           <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>
@@ -329,7 +330,8 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
               />
             </div>
           </div>
-        </div> */}
+        </div> */
+        }
       </div>
     </>
   );
