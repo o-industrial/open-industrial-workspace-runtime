@@ -17,13 +17,11 @@ export default function DashboardLayout({
           rel='shortcut icon'
           type='image/png'
           href='./assets/favicon.ico'
-          data-eac-bypass-base
         />
 
         <link
           rel='stylesheet'
           href={`./tailwind/styles.css?Revision=${Revision}`}
-          data-eac-bypass-base
         />
 
         <link
