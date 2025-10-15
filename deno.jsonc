@@ -69,7 +69,7 @@
     // "@o-industrial/common/runtimes": "../open-industrial-reference-architecture/src/runtimes/.exports.ts",
     // "@o-industrial/common/types": "../open-industrial-reference-architecture/src/types/.exports.ts",
 
-    "@o-industrial/atomic": "jsr:@o-industrial/atomic@0.0.40",
+    "@o-industrial/atomic": "jsr:@o-industrial/atomic@0.0.52",
     // "@o-industrial/atomic/atoms": "../open-industrial-atomic/src/atoms/.exports.ts",
     // "@o-industrial/atomic/icons": "../open-industrial-atomic/build/iconset/icons/.exports.ts",
     // "@o-industrial/atomic/molecules": "../open-industrial-atomic/src/molecules/.exports.ts",
@@ -78,7 +78,7 @@
     // "@o-industrial/atomic/tailwind/preset": "../open-industrial-atomic/configs/tailwind/preset.ts",
     // "@o-industrial/atomic/utils": "../open-industrial-atomic/src/utils/.exports.ts",
 
-    "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.57",
+    "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.71",
     // "@o-industrial/oi-core-pack": "../oi-core-pack/src/.pack.ts",
     // "@o-industrial/oi-core-pack/runtime/workspace-app-menu": "../oi-core-pack/src/runtime/workspaceAppMenu.tsx",
 
