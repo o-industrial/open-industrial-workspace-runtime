@@ -1,18 +1,18 @@
-# Agents Guide - Workspace Runtime Apps
+﻿# Agents Guide - Workspace Runtime Apps
 
 Overview of app surfaces hosted by open-industrial-workspace-runtime.
 
 ## Directories
 
-- workspace/ � core workspace application (dashboards, Azure connect, commits, debug). See [workspace guide](workspace/Agents.md).
-- ssets/ � static assets served by the workspace runtime.
-- ailwind/ � Tailwind styles template consumed by the runtime build.
+- workspace/ - core workspace application (dashboards, Azure connect, commits, debug). See [workspace guide](workspace/Agents.md).
+- assets/ - static assets served by the workspace runtime.
+- tailwind/ - Tailwind styles template consumed by the runtime build.
 
 ## Notes
 
-- Keep workspace routes paired with colocated pi/ handlers for mutations.
+- Keep workspace routes paired with colocated api/ handlers for mutations.
 - Asset additions require licensing/brand review; keep files optimized.
-- Tailwind updates should remain compatible with the shared config (	ailwind.config.ts).
+- Tailwind updates should remain compatible with the shared config (tailwind.config.ts).
 
 ## Ownership
 

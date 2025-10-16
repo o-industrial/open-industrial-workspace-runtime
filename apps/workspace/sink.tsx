@@ -12,7 +12,7 @@ import {
   TriggerMatchIcon,
 } from '@o-industrial/atomic/icons';
 import { IntentTypes } from '@o-industrial/common/types';
-import { Action, ActionStyleTypes, LineSparkSVG } from '@o-industrial/atomic/atoms';
+import { Action, ActionStyleTypes } from '@o-industrial/atomic/atoms';
 import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 
 // deno-lint-ignore ban-types
@@ -232,11 +232,11 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
           </div>
         </div>
 
-        <div class='space-y-8 mt-16'>
+        {
+          /* <div class='space-y-8 mt-16'>
           <h1 class='text-2xl font-bold mb-6'>LineSparkSVG Demo Grid</h1>
 
           <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {/* SMOOTH PRIMARY */}
             <div class='bg-neutral-800 p-4 rounded-md shadow-md'>
               <h2 class='text-sm font-medium mb-2 text-white'>
                 Smooth – Primary
@@ -252,7 +252,6 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
               />
             </div>
 
-            {/* LINEAR INFO */}
             <div class='bg-neutral-800 p-4 rounded-md shadow-md'>
               <h2 class='text-sm font-medium mb-2 text-white'>Linear – Info</h2>
               <LineSparkSVG
@@ -266,7 +265,6 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
               />
             </div>
 
-            {/* STEP – ERROR */}
             <div class='bg-neutral-800 p-4 rounded-md shadow-md'>
               <h2 class='text-sm font-medium mb-2 text-white'>Step – Error</h2>
               <LineSparkSVG
@@ -280,7 +278,6 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
               />
             </div>
 
-            {/* DUAL LINES – INFO + WARNING */}
             <div class='bg-neutral-800 p-4 rounded-md shadow-md'>
               <h2 class='text-sm font-medium mb-2 text-white'>
                 Multi – Info + Warning
@@ -301,7 +298,6 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
               />
             </div>
 
-            {/* NO ANIMATION */}
             <div class='bg-neutral-800 p-4 rounded-md shadow-md'>
               <h2 class='text-sm font-medium mb-2 text-white'>
                 Linear – Static
@@ -318,7 +314,6 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
               />
             </div>
 
-            {/* TERTIARY SMOOTH THICKER */}
             <div class='bg-neutral-800 p-4 rounded-md shadow-md'>
               <h2 class='text-sm font-medium mb-2 text-white'>
                 Smooth – Thick
@@ -335,7 +330,8 @@ export default function DashboardIndex({}: PageProps<IndexPageData>) {
               />
             </div>
           </div>
-        </div>
+        </div> */
+        }
       </div>
     </>
   );

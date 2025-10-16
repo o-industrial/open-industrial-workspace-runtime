@@ -100,9 +100,8 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
                 IsPrivate: true,
               },
               msal: {
-                PathPattern: '/azure/*',
+                PathPattern: '/azure/oauth/*',
                 Priority: 600,
-                IsPrivate: true,
               },
               oauth: {
                 PathPattern: '/oauth/*',
@@ -189,7 +188,11 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             },
             Processor: {
               Type: 'Tailwind',
-              DFSLookups: ['local:apps/workspace', 'jsr:@o-industrial/atomic'],
+              DFSLookups: [
+                'local:apps/workspace',
+                'jsr:@o-industrial/atomic',
+                'jsr:@o-industrial/oi-core-pack',
+              ],
               ConfigPath: './tailwind.config.ts',
               StylesTemplatePath: './apps/tailwind/styles.css',
               CacheControl: {
@@ -213,6 +216,7 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               ComponentDFSLookups: [
                 ['local:apps/workspace', ['tsx']],
                 ['jsr:@o-industrial/atomic', ['tsx']],
+                ['jsr:@o-industrial/oi-core-pack', ['tsx']],
               ],
             } as EaCPreactAppProcessor,
           },
@@ -260,6 +264,14 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'JSR',
               Package: '@o-industrial/atomic',
+              Version: '',
+              Extensions: ['tsx'],
+            } as EaCJSRDistributedFileSystemDetails,
+          },
+          'jsr:@o-industrial/oi-core-pack': {
+            Details: {
+              Type: 'JSR',
+              Package: '@o-industrial/oi-core-pack',
               Version: '',
               Extensions: ['tsx'],
             } as EaCJSRDistributedFileSystemDetails,
