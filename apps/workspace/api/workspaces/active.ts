@@ -52,7 +52,7 @@ export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
       // Force a browser redirect to the workspace root for a clean context load
       return new Response(null, {
         status: 303,
-        headers: { Location: '/' },
+        headers: { Location: '/workspace' },
       });
     } catch (err) {
       console.error('Failed to set active workspace:', err);
