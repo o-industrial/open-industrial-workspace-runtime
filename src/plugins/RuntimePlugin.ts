@@ -20,10 +20,7 @@ import {
   EaCMSAppInsightsModifierDetails,
   EaCOAuthModifierDetails,
 } from '@fathym/eac-applications/modifiers';
-import {
-  EaCJSRDistributedFileSystemDetails,
-  EaCLocalDistributedFileSystemDetails,
-} from '@fathym/eac/dfs';
+import { EaCLocalDistributedFileSystemDetails } from '@fathym/eac/dfs';
 import { EaCAzureADB2CProviderDetails, EaCAzureADProviderDetails } from '@fathym/eac-identity';
 import {
   OpenIndustrialLicensingPlugin,
@@ -272,8 +269,8 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               Type: 'Local',
               FileRoot: fromFileUrl(
                 import.meta.resolve(
-                  '../../../../o-industrial/open-industrial-atomic/'
-                )
+                  '../../../../o-industrial/open-industrial-atomic/',
+                ),
               ),
               Extensions: ['tsx'],
             } as EaCLocalDistributedFileSystemDetails,
@@ -289,8 +286,8 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               Type: 'Local',
               FileRoot: fromFileUrl(
                 import.meta.resolve(
-                  '../../../../o-industrial/oi-core-pack/'
-                )
+                  '../../../../o-industrial/oi-core-pack/',
+                ),
               ),
               Extensions: ['tsx'],
             } as EaCLocalDistributedFileSystemDetails,
