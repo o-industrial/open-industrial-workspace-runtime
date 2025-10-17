@@ -112,7 +112,7 @@ export default function WorkspacePage({
           Type: ioc.Symbol('OpenIndustrialAPIClient'),
         });
 
-        const capabilities = (await OICore.Build(ioc)).Capabilities!;
+        const pack = await OICore.Build(ioc, accessRights);
 
         const persistedScope = WorkspaceManager.ResolvePersistedScope(
           initialEaC,
@@ -127,7 +127,7 @@ export default function WorkspacePage({
           oiLicense,
           oiSvc,
           // { surface: [], workspace: [] },
-          capabilities,
+          pack,
           initialScope,
           initialScopeLookup,
           aziUrl,
