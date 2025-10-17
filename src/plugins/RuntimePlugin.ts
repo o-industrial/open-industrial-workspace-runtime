@@ -20,7 +20,10 @@ import {
   EaCMSAppInsightsModifierDetails,
   EaCOAuthModifierDetails,
 } from '@fathym/eac-applications/modifiers';
-import { EaCLocalDistributedFileSystemDetails } from '@fathym/eac/dfs';
+import {
+  EaCJSRDistributedFileSystemDetails,
+  EaCLocalDistributedFileSystemDetails,
+} from '@fathym/eac/dfs';
 import { EaCAzureADB2CProviderDetails, EaCAzureADProviderDetails } from '@fathym/eac-identity';
 import {
   OpenIndustrialLicensingPlugin,
@@ -28,7 +31,7 @@ import {
   resolveAccessRights,
 } from '@o-industrial/common/runtimes';
 import { EaCMSALProcessor } from '@fathym/msal';
-import { fromFileUrl } from '@std/path/from-file-url';
+// import { fromFileUrl } from '@std/path/from-file-url';
 
 export default class RuntimePlugin implements EaCRuntimePlugin {
   constructor() {}
@@ -259,38 +262,38 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             } as EaCLocalDistributedFileSystemDetails,
           },
           'jsr:@o-industrial/atomic': {
-            // Details: {
-            //   Type: 'JSR',
-            //   Package: '@o-industrial/atomic',
-            //   Version: '',
-            //   Extensions: ['tsx'],
-            // } as EaCJSRDistributedFileSystemDetails,
             Details: {
-              Type: 'Local',
-              FileRoot: fromFileUrl(
-                import.meta.resolve(
-                  '../../../../o-industrial/open-industrial-atomic/',
-                ),
-              ),
+              Type: 'JSR',
+              Package: '@o-industrial/atomic',
+              Version: '',
               Extensions: ['tsx'],
-            } as EaCLocalDistributedFileSystemDetails,
+            } as EaCJSRDistributedFileSystemDetails,
+            // Details: {
+            //   Type: 'Local',
+            //   FileRoot: fromFileUrl(
+            //     import.meta.resolve(
+            //       '../../../../o-industrial/open-industrial-atomic/',
+            //     ),
+            //   ),
+            //   Extensions: ['tsx'],
+            // } as EaCLocalDistributedFileSystemDetails,
           },
           'jsr:@o-industrial/oi-core-pack': {
-            // Details: {
-            //   Type: 'JSR',
-            //   Package: '@o-industrial/oi-core-pack',
-            //   Version: '',
-            //   Extensions: ['tsx'],
-            // } as EaCJSRDistributedFileSystemDetails,
             Details: {
-              Type: 'Local',
-              FileRoot: fromFileUrl(
-                import.meta.resolve(
-                  '../../../../o-industrial/oi-core-pack/',
-                ),
-              ),
+              Type: 'JSR',
+              Package: '@o-industrial/oi-core-pack',
+              Version: '',
               Extensions: ['tsx'],
-            } as EaCLocalDistributedFileSystemDetails,
+            } as EaCJSRDistributedFileSystemDetails,
+            // Details: {
+            //   Type: 'Local',
+            //   FileRoot: fromFileUrl(
+            //     import.meta.resolve(
+            //       '../../../../o-industrial/oi-core-pack/',
+            //     ),
+            //   ),
+            //   Extensions: ['tsx'],
+            // } as EaCLocalDistributedFileSystemDetails,
           },
         },
         Modifiers: {
