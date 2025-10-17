@@ -31,7 +31,7 @@ import {
   resolveAccessRights,
 } from '@o-industrial/common/runtimes';
 import { EaCMSALProcessor } from '@fathym/msal';
-import { fromFileUrl } from '@std/path/from-file-url';
+// import { fromFileUrl } from '@std/path/from-file-url';
 
 export default class RuntimePlugin implements EaCRuntimePlugin {
   constructor() {}
@@ -279,21 +279,21 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             // } as EaCLocalDistributedFileSystemDetails,
           },
           'jsr:@o-industrial/oi-core-pack': {
-            // Details: {
-            //   Type: 'JSR',
-            //   Package: '@o-industrial/oi-core-pack',
-            //   Version: '',
-            //   Extensions: ['tsx', 'ts'],
-            // } as EaCJSRDistributedFileSystemDetails,
             Details: {
-              Type: 'Local',
-              FileRoot: fromFileUrl(
-                import.meta.resolve(
-                  '../../../../o-industrial/oi-core-pack/',
-                ),
-              ),
+              Type: 'JSR',
+              Package: '@o-industrial/oi-core-pack',
+              Version: '',
               Extensions: ['tsx', 'ts'],
-            } as EaCLocalDistributedFileSystemDetails,
+            } as EaCJSRDistributedFileSystemDetails,
+            // Details: {
+            //   Type: 'Local',
+            //   FileRoot: fromFileUrl(
+            //     import.meta.resolve(
+            //       '../../../../o-industrial/oi-core-pack/',
+            //     ),
+            //   ),
+            //   Extensions: ['tsx', 'ts'],
+            // } as EaCLocalDistributedFileSystemDetails,
           },
         },
         Modifiers: {
