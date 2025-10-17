@@ -31,7 +31,7 @@ import {
   resolveAccessRights,
 } from '@o-industrial/common/runtimes';
 import { EaCMSALProcessor } from '@fathym/msal';
-// import { fromFileUrl } from '@std/path/from-file-url';
+import { fromFileUrl } from '@std/path/from-file-url';
 
 export default class RuntimePlugin implements EaCRuntimePlugin {
   constructor() {}
