@@ -266,7 +266,7 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               Type: 'JSR',
               Package: '@o-industrial/atomic',
               Version: '',
-              Extensions: ['tsx'],
+              Extensions: ['tsx', 'ts'],
             } as EaCJSRDistributedFileSystemDetails,
             // Details: {
             //   Type: 'Local',
@@ -275,7 +275,7 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             //       '../../../../o-industrial/open-industrial-atomic/',
             //     ),
             //   ),
-            //   Extensions: ['tsx'],
+            //   Extensions: ['tsx', 'ts'],
             // } as EaCLocalDistributedFileSystemDetails,
           },
           'jsr:@o-industrial/oi-core-pack': {
@@ -283,7 +283,7 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
               Type: 'JSR',
               Package: '@o-industrial/oi-core-pack',
               Version: '',
-              Extensions: ['tsx'],
+              Extensions: ['tsx', 'ts'],
             } as EaCJSRDistributedFileSystemDetails,
             // Details: {
             //   Type: 'Local',
@@ -292,7 +292,7 @@ export default class RuntimePlugin implements EaCRuntimePlugin {
             //       '../../../../o-industrial/oi-core-pack/',
             //     ),
             //   ),
-            //   Extensions: ['tsx'],
+            //   Extensions: ['tsx', 'ts'],
             // } as EaCLocalDistributedFileSystemDetails,
           },
         },
