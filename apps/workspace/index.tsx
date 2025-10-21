@@ -147,6 +147,32 @@ export default function WorkspacePage({
 
   if (!workspaceMgr) return <div>Loading workspace...</div>;
 
+  const { profile } = workspaceMgr.UseAccountProfile();
+  console.log("KBTEST: workspace " + JSON.stringify(profile));
+  const userFirstName = useMemo(() => {
+    const name = profile.Name?.trim();
+    if (name) {
+      const [first] = name.split(/\s+/);
+      if (first) return first;
+    }
+    const username = profile.Username?.trim();
+    return username ?? '';
+  }, [profile.Name, profile.Username]);
+
+  const aziExtraInputs = useMemo(
+    () => ({
+      UserName: profile.Name,
+      UserUsername: profile.Username,
+      UserFirstName: userFirstName,
+      UserProfile: {
+        Name: profile.Name,
+        Username: profile.Username,
+        FirstName: userFirstName,
+      },
+    }),
+    [profile.Name, profile.Username, userFirstName],
+  );
+
   const pathParts = workspaceMgr.UseBreadcrumb();
 
   const commitStore = workspaceMgr.UseCommits();
@@ -207,6 +233,7 @@ export default function WorkspacePage({
           workspaceMgr={workspaceMgr}
           renderMessage={(msg) => marked.parse(msg) as string}
           aziMgr={workspaceMgr.Azi}
+          extraInputs={aziExtraInputs}
         />
       }
       breadcrumb={
