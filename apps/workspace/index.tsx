@@ -148,7 +148,6 @@ export default function WorkspacePage({
   if (!workspaceMgr) return <div>Loading workspace...</div>;
 
   const { profile } = workspaceMgr.UseAccountProfile();
-  console.log("KBTEST: workspace " + JSON.stringify(profile));
   const userFirstName = useMemo(() => {
     const name = profile.Name?.trim();
     if (name) {
@@ -156,17 +155,21 @@ export default function WorkspacePage({
       if (first) return first;
     }
     const username = profile.Username?.trim();
-    return username ?? '';
+    if (username) {
+      const [localPart] = username.split('@');
+      return localPart || username;
+    }
+    return '';
   }, [profile.Name, profile.Username]);
 
   const aziExtraInputs = useMemo(
     () => ({
-      UserName: profile.Name,
+      UserName: profile.Name || profile.Username || "",
       UserUsername: profile.Username,
       UserFirstName: userFirstName,
       UserProfile: {
-        Name: profile.Name,
-        Username: profile.Username,
+        Name: profile.Name || profile.Username || "",
+        Username: profile.Username || "",
         FirstName: userFirstName,
       },
     }),
