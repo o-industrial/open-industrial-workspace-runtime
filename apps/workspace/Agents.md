@@ -1,4 +1,4 @@
-﻿# Agents Guide - Workspace App
+# Agents Guide - Workspace App
 
 Authenticated portal for managing workspaces, Azure onboarding, commits, and licensing. Routes assume MSAL/ADB2C auth and workspace licensing enforced via runtime plugins.
 

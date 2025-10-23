@@ -1,4 +1,4 @@
-﻿# Agents Guide - Workspace Runtime Apps
+# Agents Guide - Workspace Runtime Apps
 
 Overview of app surfaces hosted by open-industrial-workspace-runtime.
 

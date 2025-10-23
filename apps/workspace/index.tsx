@@ -112,7 +112,7 @@ export default function WorkspacePage({
           Type: ioc.Symbol('OpenIndustrialAPIClient'),
         });
 
-        const capabilities = (await OICore.Build(ioc)).Capabilities!;
+        const pack = await OICore.Build(ioc, accessRights);
 
         const persistedScope = WorkspaceManager.ResolvePersistedScope(
           initialEaC,
@@ -127,7 +127,7 @@ export default function WorkspacePage({
           oiLicense,
           oiSvc,
           // { surface: [], workspace: [] },
-          capabilities,
+          pack,
           initialScope,
           initialScopeLookup,
           aziUrl,
@@ -146,6 +146,35 @@ export default function WorkspacePage({
   }, []);
 
   if (!workspaceMgr) return <div>Loading workspace...</div>;
+
+  const { profile } = workspaceMgr.UseAccountProfile();
+  const userFirstName = useMemo(() => {
+    const name = profile.Name?.trim();
+    if (name) {
+      const [first] = name.split(/\s+/);
+      if (first) return first;
+    }
+    const username = profile.Username?.trim();
+    if (username) {
+      const [localPart] = username.split('@');
+      return localPart || username;
+    }
+    return '';
+  }, [profile.Name, profile.Username]);
+
+  const aziExtraInputs = useMemo(
+    () => ({
+      UserName: profile.Name || profile.Username || "",
+      UserUsername: profile.Username,
+      UserFirstName: userFirstName,
+      UserProfile: {
+        Name: profile.Name || profile.Username || "",
+        Username: profile.Username || "",
+        FirstName: userFirstName,
+      },
+    }),
+    [profile.Name, profile.Username, userFirstName],
+  );
 
   const pathParts = workspaceMgr.UseBreadcrumb();
 
@@ -207,6 +236,7 @@ export default function WorkspacePage({
           workspaceMgr={workspaceMgr}
           renderMessage={(msg) => marked.parse(msg) as string}
           aziMgr={workspaceMgr.Azi}
+          extraInputs={aziExtraInputs}
         />
       }
       breadcrumb={
