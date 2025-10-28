@@ -114,5 +114,3 @@ export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
     return Response.json({}, { status: 200 });
   },
 };
-
-export default handler;
