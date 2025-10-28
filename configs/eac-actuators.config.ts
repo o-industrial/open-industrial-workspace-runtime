@@ -5,6 +5,10 @@ export const loadEaCActuators: () => EaCModuleActuators = () => {
 
   return {
     $Force: true,
+    Clouds: {
+      APIPath: new URL('./steward/clouds/azure', base),
+      Order: 100,
+    },
     DataConnections: {
       APIPath: new URL('./actuators/data-connections', base).href,
       Order: 300,

@@ -16,14 +16,18 @@ function coalesceFoundationPlan(
   workspaceLookup: string,
   region: string,
   rgName: string,
-  incoming?: Partial<EaCFoundationDetails>,
+  incoming?: Partial<EaCFoundationDetails>
 ): EaCFoundationDetails {
-  const baseResourceGroup = incoming?.ResourceGroup ?? { Name: rgName, Location: region };
+  const baseResourceGroup = incoming?.ResourceGroup ?? {
+    Name: rgName,
+    Location: region,
+  };
 
   return {
     Type: incoming?.Type ?? 'CloudFoundationPlan',
     Name: incoming?.Name ?? 'Private Cloud Foundation Plan',
-    Description: incoming?.Description ??
+    Description:
+      incoming?.Description ??
       'Blueprint inputs for provisioning the workspace landing zone and guardrails.',
     Order: incoming?.Order ?? 1,
     WorkspaceLookup: incoming?.WorkspaceLookup || workspaceLookup,
@@ -42,7 +46,7 @@ function coalesceFoundationPlan(
 
 export const handler: EaCRuntimeHandlers<OpenIndustrialWebState> = {
   async POST(req, ctx) {
-    const body = await req.json() as CloudFoundationPlanRequest;
+    const body = (await req.json()) as CloudFoundationPlanRequest;
 
     const region = (body.region || '').trim();
     const rgName = (body.rgName || '').trim();
@@ -50,21 +54,33 @@ export const handler: EaCRuntimeHandlers<OpenIndustrialWebState> = {
     if (!region || !rgName) {
       return Response.json(
         {
-          error: 'Both `region` and `rgName` are required to configure the foundation.',
+          error:
+            'Both `region` and `rgName` are required to configure the foundation.',
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-    const workspaceLookup = ctx.State.WorkspaceLookup ?? ctx.Runtime.EaC!.EnterpriseLookup;
+    const workspaceLookup =
+      ctx.State.WorkspaceLookup ?? ctx.Runtime.EaC!.EnterpriseLookup;
     const cloudLookup = 'Workspace';
 
-    const foundationPlan = coalesceFoundationPlan(
+    let foundationPlan = coalesceFoundationPlan(
       workspaceLookup!,
       region,
       rgName,
-      body.foundationPlan,
+      body.foundationPlan
     );
+
+    if (body.tags && Object.keys(body.tags).length > 0) {
+      foundationPlan.ResourceGroup = {
+        ...foundationPlan.ResourceGroup,
+        Tags: {
+          ...(foundationPlan.ResourceGroup?.Tags ?? {}),
+          ...body.tags,
+        },
+      };
+    }
 
     const foundationLookup = 'cloud-foundation-plan';
 
@@ -78,25 +94,11 @@ export const handler: EaCRuntimeHandlers<OpenIndustrialWebState> = {
       Foundations: {
         [foundationLookup]: foundationResource,
       },
-      Clouds: {
-        [cloudLookup]: {
-          ResourceGroups: {
-            [rgName]: {
-              Details: {
-                Name: rgName,
-                Description: 'Private CALZ base resource group',
-                Location: region,
-              },
-              Tags: body.tags ?? undefined,
-            },
-          },
-        },
-      },
     };
 
     const status = await ctx.State.OIClient.Workspaces.Commit(
       { deletes: {}, eac: wkspPatch },
-      true,
+      true
     );
 
     return Response.json({ status });

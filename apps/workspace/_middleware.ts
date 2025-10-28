@@ -11,7 +11,10 @@ import { AgreementManager } from '../../src/agreements/AgreementManager.ts';
 import { loadEaCActuators } from '../../configs/eac-actuators.config.ts';
 import { EaCRuntimeContext } from '@fathym/eac/runtime';
 import { EaCAzureADProviderDetails } from '@fathym/eac-identity';
-import { createAzureADOAuthConfig, createOAuthHelpers } from '@fathym/common/oauth';
+import {
+  createAzureADOAuthConfig,
+  createOAuthHelpers,
+} from '@fathym/common/oauth';
 import { EaCApplicationsRuntimeContext } from '@fathym/eac-applications/runtime';
 import { CurrentUserManager } from '../../src/managers/CurrentUserManager.ts';
 
@@ -26,7 +29,7 @@ export default [
  * and commits runtime state into `OpenIndustrialWebState`.
  */
 export function buildOpenIndustrialRuntimeMiddleware(
-  kvLookup: string = 'eac',
+  kvLookup: string = 'eac'
 ): EaCRuntimeHandler<OpenIndustrialWebState> {
   return async (
     req,
@@ -34,7 +37,7 @@ export function buildOpenIndustrialRuntimeMiddleware(
       OpenIndustrialWebState,
       Record<string, unknown>,
       EverythingAsCodeOIWorkspace
-    >,
+    >
   ) => {
     const appCtx = ctx as EaCApplicationsRuntimeContext<OpenIndustrialWebState>;
 
@@ -53,13 +56,14 @@ export function buildOpenIndustrialRuntimeMiddleware(
 
     ctx.State.OIJWT = await loadJwtConfig().Create({
       Username: username,
+      EnterpriseLookup: lookup,
       WorkspaceLookup: lookup,
       AccessRights: appCtx.Runtime.AccessRights,
     } as OpenIndustrialJWTPayload);
 
     ctx.State.OIClient = new OpenIndustrialAPIClient(
       apiBaseUrl,
-      ctx.State.OIJWT,
+      ctx.State.OIJWT
     );
 
     ctx.State.Workspace = await ctx.State.OIClient.Workspaces.Get();
@@ -70,13 +74,14 @@ export function buildOpenIndustrialRuntimeMiddleware(
 
       ctx.State.OIJWT = await loadJwtConfig().Create({
         Username: username,
+        EnterpriseLookup: lookup,
         WorkspaceLookup: lookup,
         AccessRights: appCtx.Runtime.AccessRights,
       } as OpenIndustrialJWTPayload);
 
       ctx.State.OIClient = new OpenIndustrialAPIClient(
         apiBaseUrl,
-        ctx.State.OIJWT,
+        ctx.State.OIJWT
       );
     }
 
@@ -93,13 +98,14 @@ export function buildOpenIndustrialRuntimeMiddleware(
 
         ctx.State.OIJWT = await loadJwtConfig().Create({
           Username: username,
+          EnterpriseLookup: lookup,
           WorkspaceLookup: lookup,
           AccessRights: appCtx.Runtime.AccessRights,
         } as OpenIndustrialJWTPayload);
 
         ctx.State.OIClient = new OpenIndustrialAPIClient(
           apiBaseUrl,
-          ctx.State.OIJWT,
+          ctx.State.OIJWT
         );
       }
     }
@@ -128,7 +134,7 @@ export function buildOpenIndustrialRuntimeMiddleware(
       };
 
       const createResp = await ctx.State.OIClient.Workspaces.Create(
-        newWorkspace,
+        newWorkspace
       );
 
       lookup = createResp.EnterpriseLookup;
@@ -144,7 +150,7 @@ export function buildOpenIndustrialRuntimeMiddleware(
 
       ctx.State.OIClient = new OpenIndustrialAPIClient(
         apiBaseUrl,
-        ctx.State.OIJWT,
+        ctx.State.OIJWT
       );
     }
 
@@ -165,7 +171,7 @@ export function buildOpenIndustrialRuntimeMiddleware(
           providerDetails!.ClientID,
           providerDetails!.ClientSecret,
           providerDetails!.TenantID,
-          providerDetails!.Scopes,
+          providerDetails!.Scopes
         );
 
         const helpers = createOAuthHelpers(oAuthConfig);
@@ -174,7 +180,7 @@ export function buildOpenIndustrialRuntimeMiddleware(
 
         const oauthKv = await ctx.Runtime.IoC.Resolve<Deno.Kv>(
           Deno.Kv,
-          provider.DatabaseLookup,
+          provider.DatabaseLookup
         );
 
         const currentAccTok = await oauthKv.get<string>([
@@ -205,7 +211,7 @@ export function buildOpenIndustrialRuntimeMiddleware(
       const licRes = await licSvc.License.Get(
         ctx.Runtime.EaC.EnterpriseLookup!,
         username,
-        'o-industrial',
+        'o-industrial'
       );
 
       if (licRes.Active) {
@@ -243,7 +249,7 @@ export function buildAgreementsRedirectMiddleware(): EaCRuntimeHandler<OpenIndus
           `/agreements?returnUrl=${returnUrl}`,
           false,
           false,
-          req,
+          req
         );
       }
     }

@@ -38,22 +38,69 @@ function resolveDefinitions(
   return { cloudLookup, serviceDefinitions };
 }
 
+function ensureWorkspaceCloud(
+  ctx: Parameters<EaCRuntimeHandlerSet<OpenIndustrialWebState>['GET']>[1],
+  cloudLookup: string,
+): Response | undefined {
+  const cloud = ctx.State.Workspace?.Clouds?.[cloudLookup];
+
+  if (!cloud) {
+    return Response.json(
+      {
+        error: `Cloud '${cloudLookup}' is not configured for this workspace.`,
+      },
+      { status: 400 },
+    );
+  }
+
+  return undefined;
+}
+
+async function resolveLocations(
+  cloudLookup: string,
+  serviceDefinitions: EaCServiceDefinitions,
+  ctx: Parameters<EaCRuntimeHandlerSet<OpenIndustrialWebState>['GET']>[1],
+) {
+  const svc = await loadEaCAzureAPISvc(ctx.State.OIJWT);
+
+  return await svc.Cloud.Locations(
+    cloudLookup,
+    serviceDefinitions,
+  );
+}
+
 // Returns available locations for Azure providers to help pick a region.
 export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
   GET: async (_req, ctx) => {
-    const svc = await loadEaCAzureAPISvc(ctx.State.OIJWT);
+    const cloudLookup = 'Workspace';
 
-    const resp = await svc.Cloud.Locations(
-      'Workspace',
-      DEFAULT_SERVICE_DEFINITIONS,
-    );
+    const early = ensureWorkspaceCloud(ctx, cloudLookup);
+    if (early) return early;
 
-    return Response.json(resp);
+    try {
+      const resp = await resolveLocations(
+        cloudLookup,
+        DEFAULT_SERVICE_DEFINITIONS,
+        ctx,
+      );
+
+      return Response.json(resp);
+    } catch (err) {
+      ctx.Runtime?.Logs?.Package?.error?.(
+        `Failed to load Azure locations for ${cloudLookup}`,
+        err,
+      );
+
+      return Response.json(
+        {
+          error: 'Unable to load Azure locations for the current workspace cloud.',
+        },
+        { status: 502 },
+      );
+    }
   },
 
   POST: async (req, ctx) => {
-    const svc = await loadEaCAzureAPISvc(ctx.State.OIJWT);
-
     let payload: LocationsRequestPayload | undefined;
     try {
       payload = await req.json();
@@ -63,8 +110,29 @@ export const handler: EaCRuntimeHandlerSet<OpenIndustrialWebState> = {
 
     const { cloudLookup, serviceDefinitions } = resolveDefinitions(payload);
 
-    const resp = await svc.Cloud.Locations(cloudLookup, serviceDefinitions);
+    const early = ensureWorkspaceCloud(ctx, cloudLookup);
+    if (early) return early;
 
-    return Response.json(resp);
+    try {
+      const resp = await resolveLocations(
+        cloudLookup,
+        serviceDefinitions,
+        ctx,
+      );
+
+      return Response.json(resp);
+    } catch (err) {
+      ctx.Runtime?.Logs?.Package?.error?.(
+        `Failed to load Azure locations for ${cloudLookup}`,
+        err,
+      );
+
+      return Response.json(
+        {
+          error: 'Unable to load Azure locations for the requested workspace cloud.',
+        },
+        { status: 502 },
+      );
+    }
   },
 };
