@@ -98,9 +98,13 @@ export const handler: EaCRuntimeHandlers<OpenIndustrialWebState> = {
 
     const status = await ctx.State.OIClient.Workspaces.Commit(
       { deletes: {}, eac: wkspPatch },
-      true
+      true,
+      { awaitStatus: false }
     );
 
-    return Response.json({ status });
+    return Response.json({
+      status,
+      commitId: status.CommitID ?? status.ID ?? null,
+    });
   },
 };
