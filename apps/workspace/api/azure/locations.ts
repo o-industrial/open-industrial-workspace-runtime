@@ -4,12 +4,18 @@ import { loadEaCAzureAPISvc } from '@fathym/eac-azure/steward/clients';
 import type { EaCServiceDefinitions } from '@fathym/eac-azure';
 
 const DEFAULT_SERVICE_DEFINITIONS: EaCServiceDefinitions = {
-  'Microsoft.Resources': { Types: [] },
-  'Microsoft.Network': { Types: [] },
-  'Microsoft.KeyVault': { Types: [] },
-  'Microsoft.OperationalInsights': { Types: [] },
-  'Microsoft.Insights': { Types: [] },
-  'Microsoft.Authorization': { Types: [] },
+  'Microsoft.Resources': { Types: ['resourceGroups', 'deployments'] },
+  'Microsoft.Network': { Types: ['virtualNetworks', 'virtualNetworks/subnets'] },
+  'Microsoft.KeyVault': { Types: ['vaults'] },
+  'Microsoft.OperationalInsights': { Types: ['workspaces'] },
+  'Microsoft.Insights': { Types: ['diagnosticSettings', 'actionGroups', 'components'] },
+  'Microsoft.Authorization': { Types: ['policyAssignments', 'roleAssignments'] },
+  'Microsoft.AlertsManagement': { Types: ['smartDetectorAlertRules'] },
+  'Microsoft.Devices': { Types: ['IotHubs', 'IotHubs/eventHubEndpoints/ConsumerGroups'] },
+  'Microsoft.SignalRService': { Types: ['SignalR'] },
+  'Microsoft.Web': { Types: ['sites', 'serverfarms', 'sourcecontrols'] },
+  'Microsoft.Security': { Types: ['iotSecuritySolutions'] },
+  'Microsoft.Storage': { Types: ['storageAccounts'] },
 };
 
 type LocationsRequestPayload = {
