@@ -62,7 +62,7 @@
     // "@fathym/eac-licensing/steward/api": "../eac-licensing/src/steward/api/.exports.ts",
     // "@fathym/eac-licensing/steward/plugins": "../eac-licensing/src/steward/plugins/.exports.ts",
 
-    "@o-industrial/common": "jsr:@o-industrial/common@0.0.505",
+    "@o-industrial/common": "jsr:@o-industrial/common@0.0.511",
     // "@o-industrial/common/api": "../open-industrial-reference-architecture/src/api/.exports.ts",
     // "@o-industrial/common/eac": "../open-industrial-reference-architecture/src/eac/.exports.ts",
     // "@o-industrial/common/flow": "../open-industrial-reference-architecture/src/flow/.exports.ts",
@@ -78,7 +78,7 @@
     // "@o-industrial/atomic/tailwind/preset": "../open-industrial-atomic/configs/tailwind/preset.ts",
     // "@o-industrial/atomic/utils": "../open-industrial-atomic/src/utils/.exports.ts",
 
-    "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.102",
+    "@o-industrial/oi-core-pack": "jsr:@o-industrial/oi-core-pack@0.0.107",
     // "@o-industrial/oi-core-pack": "../oi-core-pack/src/.pack.ts",
     // "@o-industrial/oi-core-pack/runtime/workspace-app-menu": "../oi-core-pack/src/runtime/workspaceAppMenu.tsx",
 
