@@ -1,19 +1,19 @@
 import { loadJwtConfig, redirectRequest } from '@fathym/common';
 import { EaCRuntimeHandler } from '@fathym/eac/runtime/pipelines';
 import { loadEaCLicensingSvc } from '@fathym/eac-licensing/clients';
-import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
 import { OpenIndustrialAPIClient } from '@o-industrial/common/api';
 import { OpenIndustrialJWTPayload } from '@o-industrial/common/types';
+import { EverythingAsCodeOIWorkspace } from '@o-industrial/common/eac';
 
 import type { OpenIndustrialWebState } from '@o-industrial/common/runtimes';
 import { AgreementManager } from '../../src/agreements/AgreementManager.ts';
 // import { agreementsBlockerMiddleware } from '../../src/agreements/agreementsBlockerMiddleware.ts';
-import { loadEaCActuators } from '../../configs/eac-actuators.config.ts';
 import { EaCRuntimeContext } from '@fathym/eac/runtime';
 import { EaCAzureADProviderDetails } from '@fathym/eac-identity';
 import { createAzureADOAuthConfig, createOAuthHelpers } from '@fathym/common/oauth';
 import { EaCApplicationsRuntimeContext } from '@fathym/eac-applications/runtime';
 import { CurrentUserManager } from '../../src/managers/CurrentUserManager.ts';
+import { buildDefaultWorkspace } from '../../src/workspaces/buildDefaultWorkspace.ts';
 
 export default [
   // agreementsBlockerMiddleware,
@@ -106,26 +106,7 @@ export function buildOpenIndustrialRuntimeMiddleware(
 
     // 🚫 Still no workspace? Create one
     if (!lookup) {
-      const newWorkspace: EverythingAsCodeOIWorkspace = {
-        Details: {
-          Name: 'hello-azi',
-          Description: 'Getting started with Open Industrial and Azi.',
-        },
-        Actuators: loadEaCActuators(),
-        Packs: {
-          // AzureIoT: {
-          //   Details: {
-          //     Path: '@o-industrial/azure-iot-pack',
-          //   },
-          // },
-          OICore: {
-            Details: {
-              Path: '@o-industrial/oi-core-pack',
-            },
-          },
-        },
-        Clouds: {},
-      };
+      const newWorkspace = buildDefaultWorkspace();
 
       const createResp = await ctx.State.OIClient.Workspaces.Create(
         newWorkspace,
